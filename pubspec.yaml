@@ -1,0 +1,21 @@
+name: fl_ui_config
+description: "Handle UI configuration and changes for Flutter"
+version: 0.0.1
+homepage: https://github.com/ehwplus/fl_ui_config
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ">=2.0.0"
+  shared_preferences: ">=2.0.0"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
