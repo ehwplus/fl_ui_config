@@ -35,7 +35,7 @@ In your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  fl_ui_config: ^0.1.0
+  fl_ui_config: ^0.0.1
 ```
 
 Import in Dart files:
