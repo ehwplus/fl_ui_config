@@ -19,6 +19,12 @@ A small, focused Flutter library to define an app-wide, consistent UI configurat
 
 ---
 
+This is a screenshot of the demo application where you can switch between dark and light mode as well as the color palette.
+
+<img width="1459" height="915" alt="Bildschirmfoto 2025-09-17 um 11 37 34" src="https://github.com/user-attachments/assets/a2d65c7d-043a-48d6-a527-903060990fa6" />
+
+---
+
 ### Overview & features
 
 - **Central UI configuration** via `UiConfig` (app name, `ColorPalette`, fonts, assets, dark mode)
