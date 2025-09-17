@@ -10,6 +10,7 @@ export 'src/ui_config_manager/shared_preferences_ui_config_manager.dart';
 
 // color_palette
 export 'src/color_palette/color_palette.dart';
+export 'src/color_palette/font_colors.dart';
 
 // assets
 export 'src/assets_config/assets_config.dart';
