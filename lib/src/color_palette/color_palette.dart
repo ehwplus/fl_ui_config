@@ -81,36 +81,47 @@ class ColorPalette {
   }
 
   Color getErrorColor(BuildContext context) {
-    final useLight = context.isLight || errorBackground == null || brightness == Brightness.dark;
+    final useLight = context.isLight ||
+        errorBackground == null ||
+        brightness == Brightness.dark;
     return useLight ? error : errorBackground!;
   }
 
   Color getSuccessColor(BuildContext context) {
-    final useLight = context.isLight || errorBackground == null || brightness == Brightness.dark;
+    final useLight = context.isLight ||
+        errorBackground == null ||
+        brightness == Brightness.dark;
     return useLight ? success : successBackground!;
   }
 
   Color? getWarningColor(BuildContext context) {
-    final useLight = context.isLight || errorBackground == null || brightness == Brightness.dark;
+    final useLight = context.isLight ||
+        errorBackground == null ||
+        brightness == Brightness.dark;
     return useLight ? warning : warningBackground;
   }
 
   // Background Colors
 
   Color getBackgroundColor(BuildContext context) {
-    return context.isLight || brightness == Brightness.dark ? background : backgroundDark;
+    return context.isLight || brightness == Brightness.dark
+        ? background
+        : backgroundDark;
   }
 
   Color get background => basic0;
 
-  Color get backgroundDark => brightness == Brightness.dark ? basic0 : basic.shade900;
+  Color get backgroundDark =>
+      brightness == Brightness.dark ? basic0 : basic.shade900;
 
   Color get seedColor => primary;
 
   // AppBar Background Colors
 
   Color getAppBarBackgroundColor(BuildContext context) {
-    return context.isDark || brightness == Brightness.dark ? appBarBackgroundColor : appBarBackgroundColorDark;
+    return context.isDark || brightness == Brightness.dark
+        ? appBarBackgroundColor
+        : appBarBackgroundColorDark;
   }
 
   Color get appBarBackgroundColor => background;
@@ -120,15 +131,20 @@ class ColorPalette {
   // Card Colors
 
   Color getCardColor(BuildContext context) {
-    return context.isLight || brightness == Brightness.dark ? cardColor : cardColorDark;
+    return context.isLight || brightness == Brightness.dark
+        ? cardColor
+        : cardColorDark;
   }
 
   Color get cardColor => basic0;
 
-  Color get cardColorDark => brightness == Brightness.dark ? basic0 : primary.shade900;
+  Color get cardColorDark =>
+      brightness == Brightness.dark ? basic0 : primary.shade900;
 
   FontColors getFontColors(Brightness brightness) {
-    return brightness == Brightness.light || this.brightness == Brightness.dark ? fontColors : fontColorsDark;
+    return brightness == Brightness.light || this.brightness == Brightness.dark
+        ? fontColors
+        : fontColorsDark;
   }
 
   // Font Colors

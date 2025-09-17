@@ -15,5 +15,6 @@ class FontsConfig {
 
   final String fontFamilyButtons;
 
-  FontColors getFontColors(Brightness brightness) => colorPalette.getFontColors(brightness);
+  FontColors getFontColors(Brightness brightness) =>
+      colorPalette.getFontColors(brightness);
 }
