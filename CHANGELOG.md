@@ -1,6 +1,7 @@
-## 0.0.2
+## 0.0.3
 
 * Allow to use another ColorPalette for brightness dark
+* Rename colors error, success and warning
 
 ## 0.0.1
 

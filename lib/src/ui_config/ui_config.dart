@@ -55,37 +55,29 @@ class UiConfig {
     final result = <String, ColorPalette>{
       'default': defaultColorPalette,
       if (alternativeColorPalettes != null)
-        for (final entry in alternativeColorPalettes!.entries)
-          entry.key: entry.value,
+        for (final entry in alternativeColorPalettes!.entries) entry.key: entry.value,
     };
     return result;
   }
 
   /// Returns the palette for [alternativeMode] if available; otherwise returns [defaultColorPalette].
-  ColorPalette getColorPalette(
-      {Brightness? brightness, String? alternativeMode}) {
+  ColorPalette getColorPalette({Brightness? brightness, String? alternativeMode}) {
     if (brightness == Brightness.dark && defaultColorPaletteDark != null) {
-      final Map<String, ColorPalette>? alternative =
-          alternativeColorPalettesDark;
-      return (alternativeMode != null && alternative != null
-              ? alternative[alternativeMode]
-              : null) ??
+      final Map<String, ColorPalette>? alternative = alternativeColorPalettesDark;
+      return (alternativeMode != null && alternative != null ? alternative[alternativeMode] : null) ??
           defaultColorPaletteDark!;
     }
     final Map<String, ColorPalette>? alternative = alternativeColorPalettes;
-    return (alternativeMode != null && alternative != null
-            ? alternative[alternativeMode]
-            : null) ??
+    return (alternativeMode != null && alternative != null ? alternative[alternativeMode] : null) ??
         defaultColorPalette;
   }
 
   /// Builds a light [ThemeData] based on the selected palette (or default if none is provided).
   ThemeData lightTheme({String? alternativeMode}) {
-    final ColorPalette palette = getColorPalette(
-        brightness: Brightness.light, alternativeMode: alternativeMode);
-    final onSurface = palette.fontColorsLight.normal;
-    final onPrimary = palette.fontColorsLight.normalInverted;
-    final background = palette.backgroundLight;
+    final ColorPalette palette = getColorPalette(brightness: Brightness.light, alternativeMode: alternativeMode);
+    final onSurface = palette.fontColors.normal;
+    final onPrimary = palette.fontColors.normalInverted;
+    final background = palette.background;
     return ThemeData(
       brightness: Brightness.light,
       primaryColor: palette.primary,
@@ -99,26 +91,22 @@ class UiConfig {
         surface: background,
         onSurface: onSurface,
         primaryContainer: palette.primary,
-        error: palette.errorLight,
-        errorContainer: palette.errorLight,
-        onErrorContainer: palette.fontColorsLight.normal,
+        error: palette.error,
+        errorContainer: palette.error,
+        onErrorContainer: palette.fontColors.normal,
       ),
       scaffoldBackgroundColor: background,
-      hintColor: palette.fontColorsLight.description,
+      hintColor: palette.fontColors.description,
       fontFamily: fonts.fontFamily,
-      textTheme: ThemeData(brightness: Brightness.light)
-          .textTheme
-          .apply(fontFamily: fonts.fontFamily),
-      cardColor: palette.cardColorLight,
-      appBarTheme:
-          AppBarTheme(backgroundColor: palette.appBarBackgroundColorLight),
+      textTheme: ThemeData(brightness: Brightness.light).textTheme.apply(fontFamily: fonts.fontFamily),
+      cardColor: palette.cardColor,
+      appBarTheme: AppBarTheme(backgroundColor: palette.appBarBackgroundColor),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: palette.primary,
         foregroundColor: onPrimary,
         iconSize: 32,
       ),
-      navigationBarTheme:
-          const NavigationBarThemeData(backgroundColor: Colors.white),
+      navigationBarTheme: const NavigationBarThemeData(backgroundColor: Colors.white),
     );
   }
 
@@ -129,8 +117,7 @@ class UiConfig {
     if (!isDarkModeEnabled) {
       return null;
     }
-    final ColorPalette palette = getColorPalette(
-        brightness: Brightness.dark, alternativeMode: alternativeMode);
+    final ColorPalette palette = getColorPalette(brightness: Brightness.dark, alternativeMode: alternativeMode);
     final onSurface = palette.fontColorsDark.normal;
     final onPrimary = palette.fontColorsDark.normalInverted;
     final background = palette.backgroundDark;
@@ -148,26 +135,22 @@ class UiConfig {
         surface: background,
         onSurface: onSurface,
         primaryContainer: palette.primary,
-        error: palette.errorDark,
-        errorContainer: palette.errorDark,
+        error: defaultColorPaletteDark == null ? palette.errorBackground : palette.error,
+        errorContainer: defaultColorPaletteDark == null ? palette.error : palette.errorBackground,
         onErrorContainer: palette.fontColorsDark.normal,
       ),
       scaffoldBackgroundColor: background,
       hintColor: palette.fontColorsDark.description,
       fontFamily: fonts.fontFamily,
-      textTheme: ThemeData(brightness: Brightness.dark)
-          .textTheme
-          .apply(fontFamily: fonts.fontFamily),
+      textTheme: ThemeData(brightness: Brightness.dark).textTheme.apply(fontFamily: fonts.fontFamily),
       cardColor: palette.cardColorDark,
-      appBarTheme:
-          AppBarTheme(backgroundColor: palette.appBarBackgroundColorDark),
+      appBarTheme: AppBarTheme(backgroundColor: palette.appBarBackgroundColorDark),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: palette.primary,
         foregroundColor: onPrimary,
         iconSize: 32,
       ),
-      navigationBarTheme:
-          const NavigationBarThemeData(backgroundColor: Colors.black),
+      navigationBarTheme: const NavigationBarThemeData(backgroundColor: Colors.black),
     );
   }
 }

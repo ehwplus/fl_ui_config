@@ -1,3 +1,4 @@
+import 'package:fl_ui_config/fl_ui_config.dart';
 import 'package:fl_ui_config/src/color_palette/color_grey.dart';
 import 'package:flutter/material.dart';
 
@@ -26,16 +27,19 @@ class ColorPalette {
   /// Color 4
   final MaterialColor? quaternary;
 
-  final Color errorLight;
-  final Color? errorDark;
+  final Color error;
+  final Color? errorBackground;
 
-  final Color successLight;
-  final Color? successDark;
+  final Color success;
+  final Color? successBackground;
 
-  final Color? warningLight;
-  final Color? warningDark;
+  final Color? warning;
+  final Color? warningBackground;
 
   final Map<String, String>? replacementMap;
+
+  /// If brightness is light,
+  final Brightness brightness;
 
   static ColorPalette fromMaterialColor({
     required MaterialColor primary,
@@ -50,28 +54,28 @@ class ColorPalette {
       secondary: secondary,
       tertiary: tertiary,
       quaternary: quaternary,
-      errorLight: Colors.red.shade200,
-      errorDark: Colors.red,
-      successLight: Colors.green.shade200,
-      successDark: Colors.green,
-      warningLight: Colors.yellow.shade400,
-      warningDark: Colors.yellow.shade900,
+      errorBackground: Colors.red.shade200,
+      error: Colors.red,
+      successBackground: Colors.green.shade200,
+      success: Colors.green,
+      warningBackground: Colors.yellow.shade400,
+      warning: Colors.yellow.shade900,
     );
   }
 
   Color getErrorColor(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark && errorDark != null ? errorDark! : errorLight;
+    final useLight = context.isLight || errorBackground == null || brightness == Brightness.dark;
+    return useLight ? error : errorBackground!;
   }
 
   Color getSuccessColor(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark && successDark != null ? successDark! : successLight;
+    final useLight = context.isLight || errorBackground == null || brightness == Brightness.dark;
+    return useLight ? success : successBackground!;
   }
 
   Color? getWarningColor(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark && warningDark != null ? warningDark! : warningLight;
+    final useLight = context.isLight || errorBackground == null || brightness == Brightness.dark;
+    return useLight ? warning : warningBackground;
   }
 
   const ColorPalette({
@@ -81,65 +85,62 @@ class ColorPalette {
     this.secondary,
     this.tertiary,
     this.quaternary,
-    required this.errorLight,
-    required this.errorDark,
-    required this.successLight,
-    required this.successDark,
-    this.warningLight,
-    this.warningDark,
+    required this.error,
+    required this.errorBackground,
+    required this.success,
+    required this.successBackground,
+    this.warning,
+    this.warningBackground,
     this.replacementMap,
+    this.brightness = Brightness.light,
   });
 
   // Background Colors
 
   Color getBackgroundColor(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? backgroundLight : backgroundDark;
+    return context.isLight || brightness == Brightness.dark ? background : backgroundDark;
   }
 
-  Color get backgroundLight => basic0;
+  Color get background => basic0;
 
-  Color get backgroundDark => basic.shade900;
+  Color get backgroundDark => brightness == Brightness.dark ? basic0 : basic.shade900;
 
   Color get seedColor => primary;
 
   // AppBar Background Colors
 
   Color getAppBarBackgroundColor(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? appBarBackgroundColorLight : appBarBackgroundColorDark;
+    return context.isDark || brightness == Brightness.dark ? appBarBackgroundColor : appBarBackgroundColorDark;
   }
 
-  Color get appBarBackgroundColorLight => backgroundLight;
+  Color get appBarBackgroundColor => background;
 
   Color get appBarBackgroundColorDark => backgroundDark;
 
   // Card Colors
 
   Color getCardColor(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? cardColorLight : cardColorDark;
+    return context.isLight || brightness == Brightness.dark ? cardColor : cardColorDark;
   }
 
-  Color get cardColorLight => basic0;
+  Color get cardColor => basic0;
 
-  Color get cardColorDark => primary.shade900;
+  Color get cardColorDark => brightness == Brightness.dark ? basic0 : primary.shade900;
 
   FontColors getFontColors(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? fontColorsDark : fontColorsLight;
+    return context.isLight || brightness == Brightness.dark ? fontColors : fontColorsDark;
   }
 
   // Font Colors
 
-  FontColors get fontColorsLight => FontColors(
+  FontColors get fontColors => FontColors(
         normal: basic.shade900,
         normalInverted: basic0,
         link: primary.shade500,
         description: basic.shade600,
         disabled: basic.shade400,
-        success: successDark ?? successLight,
-        failure: errorDark ?? errorLight,
+        success: success,
+        failure: error,
       );
 
   FontColors get fontColorsDark => FontColors(
@@ -148,8 +149,8 @@ class ColorPalette {
         link: primary.shade500,
         description: basic.shade400,
         disabled: basic.shade600,
-        success: successLight,
-        failure: errorLight,
+        success: successBackground ?? success,
+        failure: errorBackground ?? error,
       );
 
   // Helpers

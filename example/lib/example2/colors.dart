@@ -12,14 +12,13 @@ class ColorsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorPalette = context.colorPalette;
-    final fontColors = colorPalette.fontColorsLight;
+    final fontColors = colorPalette.fontColors;
     final Map<String, MaterialColor> materialColors = {
       'Basic': colorPalette.basic,
       'Primary': colorPalette.primary,
       if (colorPalette.secondary != null) 'Secondary': colorPalette.secondary!,
       if (colorPalette.tertiary != null) 'Tertiary': colorPalette.tertiary!,
-      if (colorPalette.quaternary != null)
-        'Quaternary': colorPalette.quaternary!,
+      if (colorPalette.quaternary != null) 'Quaternary': colorPalette.quaternary!,
     };
 
     return Padding(
@@ -35,42 +34,27 @@ class ColorsWidget extends StatelessWidget {
                       builder: (context) {
                         final shades = entry.value.allShades;
                         final double coloredBoxWidth =
-                            (constraints.maxWidth -
-                                (2 *
-                                    _marginHorizontal *
-                                    materialColors.length)) /
+                            (constraints.maxWidth - (2 * _marginHorizontal * materialColors.length)) /
                             materialColors.length;
-                        final double coloredBoxHeight = min(
-                          coloredBoxWidth / 2,
-                          _maxColoredBoxHeight,
-                        );
+                        final double coloredBoxHeight = min(coloredBoxWidth / 2, _maxColoredBoxHeight);
                         return Column(
                           children: [
                             Center(
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
-                                child: Text(
-                                  entry.key,
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
+                                child: Text(entry.key, style: Theme.of(context).textTheme.titleLarge),
                               ),
                             ),
                             for (int i = 0; i < shades.length; i++)
                               Container(
                                 width: coloredBoxWidth,
                                 height: coloredBoxHeight,
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: _marginHorizontal,
-                                ),
+                                margin: const EdgeInsets.symmetric(horizontal: _marginHorizontal),
                                 color: shades[i],
                                 child: Center(
                                   child: Text(
                                     shades[i].toHexString(),
-                                    style: TextStyle(
-                                      color: i < 5
-                                          ? fontColors.normalInverted
-                                          : fontColors.normal,
-                                    ),
+                                    style: TextStyle(color: i < 5 ? fontColors.normalInverted : fontColors.normal),
                                   ),
                                 ),
                               ),
@@ -87,27 +71,18 @@ class ColorsWidget extends StatelessWidget {
             builder: (context, constraints) {
               const double marginHorizontal = 16.0;
               final Map<String, Color> colorMap = {
-                'Error light': colorPalette.errorLight,
-                if (colorPalette.errorDark != null)
-                  'Error dark': colorPalette.errorDark!,
-                'Success light': colorPalette.successLight,
-                if (colorPalette.successDark != null)
-                  'Success dark': colorPalette.successDark!,
-                if (colorPalette.warningLight != null)
-                  'Warn light': colorPalette.warningLight!,
-                if (colorPalette.warningDark != null)
-                  'Warn dark': colorPalette.warningDark!,
+                'Error': colorPalette.error,
+                if (colorPalette.errorBackground != null) 'Error background': colorPalette.errorBackground!,
+                'Success': colorPalette.success,
+                if (colorPalette.successBackground != null) 'Success background': colorPalette.successBackground!,
+                if (colorPalette.warning != null) 'Warn': colorPalette.warning!,
+                if (colorPalette.warningBackground != null) 'Warn background': colorPalette.warningBackground!,
               };
               final double coloredBoxWidth = max(
-                (constraints.maxWidth -
-                        (2 * marginHorizontal * colorMap.length)) /
-                    colorMap.length,
+                (constraints.maxWidth - (2 * marginHorizontal * colorMap.length)) / colorMap.length,
                 200,
               );
-              final double coloredBoxHeight = min(
-                coloredBoxWidth / 2,
-                _maxColoredBoxHeight,
-              );
+              final double coloredBoxHeight = min(coloredBoxWidth / 2, _maxColoredBoxHeight);
               return Wrap(
                 children: [
                   for (int i = 0; i < colorMap.length; i++)
@@ -119,27 +94,18 @@ class ColorsWidget extends StatelessWidget {
                           Center(
                             child: Padding(
                               padding: const EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                colorMap.keys.toList()[i],
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
+                              child: Text(colorMap.keys.toList()[i], style: Theme.of(context).textTheme.titleLarge),
                             ),
                           ),
                           Container(
                             width: coloredBoxWidth,
                             height: coloredBoxHeight,
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: marginHorizontal,
-                            ),
+                            margin: const EdgeInsets.symmetric(horizontal: marginHorizontal),
                             color: colorMap.values.toList()[i],
                             child: Center(
                               child: Text(
                                 colorMap.values.toList()[i].toHexString(),
-                                style: TextStyle(
-                                  color: i % 2 == 0
-                                      ? fontColors.normal
-                                      : fontColors.normalInverted,
-                                ),
+                                style: TextStyle(color: i % 2 == 0 ? fontColors.normalInverted : fontColors.normal),
                               ),
                             ),
                           ),
