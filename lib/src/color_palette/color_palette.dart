@@ -29,6 +29,14 @@ class ColorPalette {
   final Color errorLight;
   final Color? errorDark;
 
+  final Color successLight;
+  final Color? successDark;
+
+  final Color? warningLight;
+  final Color? warningDark;
+
+  final Map<String, String>? replacementMap;
+
   static ColorPalette fromMaterialColor({
     required MaterialColor primary,
     MaterialColor? secondary,
@@ -56,23 +64,15 @@ class ColorPalette {
     return isDark && errorDark != null ? errorDark! : errorLight;
   }
 
-  final Color successLight;
-  final Color? successDark;
-
   Color getSuccessColor(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return isDark && successDark != null ? successDark! : successLight;
   }
 
-  final Color? warningLight;
-  final Color? warningDark;
-
   Color? getWarningColor(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return isDark && warningDark != null ? warningDark! : warningLight;
   }
-
-  final Map<String, String>? replacementMap;
 
   const ColorPalette({
     required this.basic0,
@@ -98,6 +98,7 @@ class ColorPalette {
   }
 
   Color get backgroundLight => basic0;
+
   Color get backgroundDark => basic.shade900;
 
   Color get seedColor => primary;
@@ -110,6 +111,7 @@ class ColorPalette {
   }
 
   Color get appBarBackgroundColorLight => backgroundLight;
+
   Color get appBarBackgroundColorDark => backgroundDark;
 
   // Card Colors
@@ -131,24 +133,24 @@ class ColorPalette {
   // Font Colors
 
   FontColors get fontColorsLight => FontColors(
-    normal: basic.shade900,
-    normalInverted: basic0,
-    link: primary.shade500,
-    description: basic.shade600,
-    disabled: basic.shade400,
-    success: successDark ?? successLight,
-    failure: errorDark ?? errorLight,
-  );
+        normal: basic.shade900,
+        normalInverted: basic0,
+        link: primary.shade500,
+        description: basic.shade600,
+        disabled: basic.shade400,
+        success: successDark ?? successLight,
+        failure: errorDark ?? errorLight,
+      );
 
   FontColors get fontColorsDark => FontColors(
-    normal: basic0,
-    normalInverted: basic.shade900,
-    link: primary.shade500,
-    description: basic.shade400,
-    disabled: basic.shade600,
-    success: successLight,
-    failure: errorLight,
-  );
+        normal: basic0,
+        normalInverted: basic.shade900,
+        link: primary.shade500,
+        description: basic.shade400,
+        disabled: basic.shade600,
+        success: successLight,
+        failure: errorLight,
+      );
 
   // Helpers
 

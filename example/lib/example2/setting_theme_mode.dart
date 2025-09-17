@@ -30,7 +30,11 @@ class ThemeModeButton extends StatelessWidget {
       initialValue: value,
       onSelected: onChanged,
       itemBuilder: (context) => [
-        _menuItem(ThemeMode.system, labels.system, Icons.settings_suggest_outlined),
+        _menuItem(
+          ThemeMode.system,
+          labels.system,
+          Icons.settings_suggest_outlined,
+        ),
         _menuItem(ThemeMode.light, labels.light, Icons.light_mode_outlined),
         _menuItem(ThemeMode.dark, labels.dark, Icons.dark_mode_outlined),
       ],
@@ -43,7 +47,10 @@ class ThemeModeButton extends StatelessWidget {
               FilledButton.styleFrom(
                 backgroundColor: colorScheme.secondaryContainer,
                 foregroundColor: colorScheme.onSecondaryContainer,
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
                 shape: const StadiumBorder(),
               ),
           onPressed: null,
@@ -65,10 +72,16 @@ class ThemeModeButton extends StatelessWidget {
     );
   }
 
-  PopupMenuItem<ThemeMode> _menuItem(ThemeMode mode, String label, IconData icon) {
+  PopupMenuItem<ThemeMode> _menuItem(
+    ThemeMode mode,
+    String label,
+    IconData icon,
+  ) {
     return PopupMenuItem<ThemeMode>(
       value: mode,
-      child: Row(children: [Icon(icon), const SizedBox(width: 12), Text(label)]),
+      child: Row(
+        children: [Icon(icon), const SizedBox(width: 12), Text(label)],
+      ),
     );
   }
 
@@ -99,7 +112,13 @@ class ThemeModeLabels {
   final String menuTooltip;
   final String changeTo;
 
-  ThemeModeLabels copyWith({String? system, String? light, String? dark, String? menuTooltip, String? changeTo}) {
+  ThemeModeLabels copyWith({
+    String? system,
+    String? light,
+    String? dark,
+    String? menuTooltip,
+    String? changeTo,
+  }) {
     return ThemeModeLabels(
       system: system ?? this.system,
       light: light ?? this.light,

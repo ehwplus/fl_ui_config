@@ -7,10 +7,19 @@ const appName = 'UiConfig Demo';
 
 final uiConfig = UiConfig(
   appName: 'UiConfig Demo 2',
-  defaultColorPalette: ColorPalette.fromMaterialColor(primary: Colors.orange, secondary: Colors.blue),
+  defaultColorPalette: ColorPalette.fromMaterialColor(
+    primary: Colors.orange,
+    secondary: Colors.blue,
+  ),
   alternativeColorPalettes: {
-    'yellow': ColorPalette.fromMaterialColor(primary: Colors.yellow, secondary: Colors.blue),
-    'red': ColorPalette.fromMaterialColor(primary: Colors.red, secondary: Colors.blue),
+    'yellow': ColorPalette.fromMaterialColor(
+      primary: Colors.yellow,
+      secondary: Colors.blue,
+    ),
+    'red': ColorPalette.fromMaterialColor(
+      primary: Colors.red,
+      secondary: Colors.blue,
+    ),
   },
 );
 
@@ -23,9 +32,17 @@ class ExampleApp2 extends StatelessWidget {
       uiConfig: uiConfig,
       uiConfigManager: TesterUiConfigManager(delayInMillis: 0),
       builder:
-          ({String? alternativeColorPaletteKey, required ThemeMode themeMode, required bool isHighContrastEnabled}) {
-            final lightTheme = uiConfig.lightTheme(alternativeMode: alternativeColorPaletteKey);
-            final darkTheme = uiConfig.darkTheme(alternativeMode: alternativeColorPaletteKey);
+          ({
+            String? alternativeColorPaletteKey,
+            required ThemeMode themeMode,
+            required bool isHighContrastEnabled,
+          }) {
+            final lightTheme = uiConfig.lightTheme(
+              alternativeMode: alternativeColorPaletteKey,
+            );
+            final darkTheme = uiConfig.darkTheme(
+              alternativeMode: alternativeColorPaletteKey,
+            );
             return MaterialApp(
               title: appName,
               theme: lightTheme,

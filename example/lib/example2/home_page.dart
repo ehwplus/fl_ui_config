@@ -17,11 +17,19 @@ class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: Text(widget.title)),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [HeadlineLarge('Settings'), Settings(), HeadlineLarge('Colors'), ColorsWidget()],
+          children: [
+            HeadlineLarge('Settings'),
+            Settings(),
+            HeadlineLarge('Colors'),
+            ColorsWidget(),
+          ],
         ),
       ),
     );

@@ -35,12 +35,17 @@ class MaterialAppWithUiConfig extends StatelessWidget {
       uiConfig: uiConfig,
       uiConfigManager: uiConfigManager,
       placeholderWidget: placeholderWidget,
-      builder:
-          ({String? alternativeColorPaletteKey, required ThemeMode themeMode, required bool isHighContrastEnabled}) {
-            final lightTheme = uiConfig.lightTheme(alternativeMode: alternativeColorPaletteKey);
-            final darkTheme = uiConfig.darkTheme(alternativeMode: alternativeColorPaletteKey);
-            return MaterialApp(title: title, theme: lightTheme, darkTheme: darkTheme, home: home);
-          },
+      builder: (
+          {String? alternativeColorPaletteKey,
+          required ThemeMode themeMode,
+          required bool isHighContrastEnabled}) {
+        final lightTheme =
+            uiConfig.lightTheme(alternativeMode: alternativeColorPaletteKey);
+        final darkTheme =
+            uiConfig.darkTheme(alternativeMode: alternativeColorPaletteKey);
+        return MaterialApp(
+            title: title, theme: lightTheme, darkTheme: darkTheme, home: home);
+      },
     );
   }
 }

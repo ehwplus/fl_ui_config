@@ -2,7 +2,12 @@ import 'package:fl_ui_config/fl_ui_config.dart';
 import 'package:flutter/material.dart';
 
 class SettingColorPalette extends StatelessWidget {
-  const SettingColorPalette({super.key, required this.alternativeColorPaletteKey, required this.onChanged, this.style});
+  const SettingColorPalette({
+    super.key,
+    required this.alternativeColorPaletteKey,
+    required this.onChanged,
+    this.style,
+  });
 
   /// current value
   final String? alternativeColorPaletteKey;
@@ -22,7 +27,8 @@ class SettingColorPalette extends StatelessWidget {
       initialValue: alternativeColorPaletteKey,
       onSelected: onChanged,
       itemBuilder: (context) => [
-        for (final paletteEntry in allPalettes.entries) _menuItem(paletteEntry.key, paletteEntry.value),
+        for (final paletteEntry in allPalettes.entries)
+          _menuItem(paletteEntry.key, paletteEntry.value),
       ],
       child: Semantics(
         button: true,
@@ -33,7 +39,10 @@ class SettingColorPalette extends StatelessWidget {
               FilledButton.styleFrom(
                 backgroundColor: colorScheme.secondaryContainer,
                 foregroundColor: colorScheme.onSecondaryContainer,
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
                 shape: const StadiumBorder(),
               ),
           onPressed: null,

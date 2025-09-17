@@ -36,8 +36,8 @@ class LocalImageAsset extends LocalImage {
       fit: fitHeight == true
           ? BoxFit.fitHeight
           : fitWidth == true
-          ? BoxFit.fitWidth
-          : null,
+              ? BoxFit.fitWidth
+              : null,
     );
   }
 }
@@ -66,8 +66,8 @@ class LocalVectorImageAsset extends LocalImage {
       fit: fitHeight == true
           ? BoxFit.fitHeight
           : fitWidth == true
-          ? BoxFit.fitWidth
-          : BoxFit.contain,
+              ? BoxFit.fitWidth
+              : BoxFit.contain,
     );
   }
 }

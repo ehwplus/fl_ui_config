@@ -8,8 +8,10 @@ class SharedPreferencesUiConfigManager extends UiConfigManager {
   static const _packageName = 'fl_ui_config';
 
   static const _keyThemeMode = '$_packageName.KEY_THEME_MODE';
-  static const _keyAlternativeColorPalette = '$_packageName.KEY_ALTERNATIVE_COLOR_PALETTE';
-  static const _keyIsHighContrastEnabled = '$_packageName.KEY_IS_HIGH_CONTRAST_ENABLED';
+  static const _keyAlternativeColorPalette =
+      '$_packageName.KEY_ALTERNATIVE_COLOR_PALETTE';
+  static const _keyIsHighContrastEnabled =
+      '$_packageName.KEY_IS_HIGH_CONTRAST_ENABLED';
 
   static const ThemeMode _defaultUiMode = ThemeMode.system;
   static const bool _defaultIsHighContrastEnabled = false;
@@ -23,18 +25,23 @@ class SharedPreferencesUiConfigManager extends UiConfigManager {
   @override
   ThemeMode loadThemeMode() {
     final key = sharedPreferences.getString(_keyThemeMode) ?? _defaultUiMode;
-    return _themeMode ?? ThemeMode.values.firstWhere((value) => value.name == key, orElse: () => ThemeMode.system);
+    return _themeMode ??
+        ThemeMode.values.firstWhere((value) => value.name == key,
+            orElse: () => ThemeMode.system);
   }
 
   @override
   String? loadAlternativeColorPaletteKey() {
-    final alternativeColorPaletteKey = sharedPreferences.getString(_keyAlternativeColorPalette);
+    final alternativeColorPaletteKey =
+        sharedPreferences.getString(_keyAlternativeColorPalette);
     return _alternativeColorPaletteKey ?? alternativeColorPaletteKey;
   }
 
   @override
   bool loadIsHighContrastEnabled() {
-    bool isHighContrastEnabled = sharedPreferences.getBool(_keyIsHighContrastEnabled) ?? _defaultIsHighContrastEnabled;
+    bool isHighContrastEnabled =
+        sharedPreferences.getBool(_keyIsHighContrastEnabled) ??
+            _defaultIsHighContrastEnabled;
     return isHighContrastEnabled;
   }
 
@@ -51,13 +58,15 @@ class SharedPreferencesUiConfigManager extends UiConfigManager {
     if (value == null) {
       return sharedPreferences.remove(_keyAlternativeColorPalette);
     }
-    final result = await sharedPreferences.setString(_keyAlternativeColorPalette, value);
+    final result =
+        await sharedPreferences.setString(_keyAlternativeColorPalette, value);
     return result;
   }
 
   @override
   Future<bool> saveIsHighContrastEnabled(bool value) async {
-    final result = await sharedPreferences.setBool(_keyIsHighContrastEnabled, value);
+    final result =
+        await sharedPreferences.setBool(_keyIsHighContrastEnabled, value);
     return result;
   }
 }
