@@ -85,6 +85,18 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
   /// Convenience access to the provided [UiConfig].
   UiConfig get uiConfig => widget.uiConfig;
 
+  @override
+  void initState() {
+    super.initState();
+    _globalUiConfigSettings = _GlobalUiConfigSettings(
+      alternativeColorPaletteKey: widget.uiConfigManager.loadAlternativeColorPaletteKey(),
+      themeMode: themeMode,
+      isHighContrastEnabled: false,
+      uiConfig: uiConfig,
+      brightness: Theme.of(context).brightness,
+    );
+  }
+
   /// Saves a new alternative color palette key and updates local state.
   Future<void> saveAlternativeColorPaletteKey(String? value) async {
     _updateAlternativeColorPaletteKey(value);
@@ -129,7 +141,7 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
       child: FutureBuilder<UiSettings>(
         future: _initFuture,
         builder: (_, snapshot) {
-          globalUiConfigSettings = GlobalUiConfigSettings(
+          _globalUiConfigSettings = _GlobalUiConfigSettings(
             alternativeColorPaletteKey: alternativeColorPaletteKey,
             themeMode: themeMode,
             isHighContrastEnabled: isHighConstrastEnabled,
@@ -180,8 +192,8 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
 }
 
 @immutable
-class GlobalUiConfigSettings {
-  const GlobalUiConfigSettings({
+class _GlobalUiConfigSettings {
+  const _GlobalUiConfigSettings({
     required this.alternativeColorPaletteKey,
     required this.themeMode,
     required this.isHighContrastEnabled,
@@ -215,67 +227,34 @@ class GlobalUiConfigSettings {
   }
 }
 
-GlobalUiConfigSettings? globalUiConfigSettings;
+late _GlobalUiConfigSettings _globalUiConfigSettings;
 
-/// Convenience extensions to access UI config and persist settings from any [BuildContext].
-extension UiConfigStatefulWidgetExtension on BuildContext {
-  /// Access the current [UiConfig].
-  UiConfig get uiConfig {
-    return StatefulWidgetWithUiConfig.of(this).uiConfig;
-  }
+/// The currently active [ColorPalette] derived from the selected key.
+ColorPalette get colorPalette {
+  return _globalUiConfigSettings.colorPalette;
+}
 
-  /// The selected alternative palette key or null when default.
-  String? get alternativeColorPaletteKey {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    return app.alternativeColorPaletteKey;
-  }
+/// The configured [AssetsConfig].
+AssetsConfig get assets {
+  return _globalUiConfigSettings.uiConfig.assets;
+}
 
-  /// The currently active [ColorPalette] derived from the selected key.
-  ColorPalette get colorPalette {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    final brightness = Theme.of(this).brightness;
-    return app.uiConfig.getColorPalette(brightness: brightness, alternativeMode: app.alternativeColorPaletteKey);
-  }
+/// The configured [FontsConfig].
+FontsConfig get fonts {
+  return _globalUiConfigSettings.uiConfig.fonts;
+}
 
-  /// The configured [AssetsConfig].
-  AssetsConfig get assets {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    return app.uiConfig.assets;
-  }
+/// Whether high-contrast mode is enabled.
+bool get isHighContrastEnabled {
+  return _globalUiConfigSettings.isHighContrastEnabled;
+}
 
-  /// The configured [FontsConfig].
-  FontsConfig get fonts {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    return app.uiConfig.fonts;
-  }
+/// Access the current [UiConfig].
+UiConfig get uiConfig {
+  return _globalUiConfigSettings.uiConfig;
+}
 
-  /// Whether high-contrast mode is enabled.
-  bool get isHighContrastEnabled {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    return app.isHighConstrastEnabled;
-  }
-
-  /// The current [ThemeMode].
-  ThemeMode get themeMode {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    return app.themeMode;
-  }
-
-  /// Persists a new alternative palette key and updates UI.
-  Future<void> saveAlternativeColorPaletteKey(String? value) async {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    await app.saveAlternativeColorPaletteKey(value);
-  }
-
-  /// Persists the high-contrast flag and updates UI.
-  Future<void> saveIsHighContrastEnabled(bool value) async {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    await app.saveIsHighContrastEnabled(value);
-  }
-
-  /// Persists a new [ThemeMode] and updates UI.
-  Future<void> saveThemeMode(ThemeMode value) async {
-    final app = StatefulWidgetWithUiConfig.of(this);
-    await app.saveThemeMode(value);
-  }
+/// The selected alternative palette key or null when default.
+String? get alternativeColorPaletteKey {
+  return _globalUiConfigSettings.alternativeColorPaletteKey;
 }

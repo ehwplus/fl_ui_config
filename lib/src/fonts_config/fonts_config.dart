@@ -1,6 +1,5 @@
+import 'package:fl_ui_config/fl_ui_config.dart';
 import 'package:flutter/cupertino.dart';
-
-import 'fonts.dart';
 
 @immutable
 class FontsConfig {
@@ -15,4 +14,6 @@ class FontsConfig {
   final String fontFamilyHeadlines;
 
   final String fontFamilyButtons;
+
+  FontColors getFontColors(Brightness brightness) => colorPalette.getFontColors(brightness);
 }

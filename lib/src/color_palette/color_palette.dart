@@ -2,13 +2,28 @@ import 'package:fl_ui_config/fl_ui_config.dart';
 import 'package:fl_ui_config/src/color_palette/color_grey.dart';
 import 'package:flutter/material.dart';
 
-import 'font_colors.dart';
-
 /// Backup color to directly visualize if a undefined color is in use.
 const Color colorNotDefined = Color(0xFFFF13F0);
 
 @immutable
 class ColorPalette {
+  const ColorPalette({
+    required this.basic0,
+    required this.basic,
+    required this.primary,
+    this.secondary,
+    this.tertiary,
+    this.quaternary,
+    required this.error,
+    required this.errorBackground,
+    required this.success,
+    required this.successBackground,
+    this.warning,
+    this.warningBackground,
+    this.replacementMap,
+    this.brightness = Brightness.light,
+  });
+
   /// Color 0 where basic0 is used a default background
   final Color basic0;
 
@@ -46,6 +61,7 @@ class ColorPalette {
     MaterialColor? secondary,
     MaterialColor? tertiary,
     MaterialColor? quaternary,
+    Brightness brightness = Brightness.light,
   }) {
     return ColorPalette(
       basic0: BaseColors.gray0,
@@ -60,6 +76,7 @@ class ColorPalette {
       success: Colors.green,
       warningBackground: Colors.yellow.shade400,
       warning: Colors.yellow.shade900,
+      brightness: brightness,
     );
   }
 
@@ -77,23 +94,6 @@ class ColorPalette {
     final useLight = context.isLight || errorBackground == null || brightness == Brightness.dark;
     return useLight ? warning : warningBackground;
   }
-
-  const ColorPalette({
-    required this.basic0,
-    required this.basic,
-    required this.primary,
-    this.secondary,
-    this.tertiary,
-    this.quaternary,
-    required this.error,
-    required this.errorBackground,
-    required this.success,
-    required this.successBackground,
-    this.warning,
-    this.warningBackground,
-    this.replacementMap,
-    this.brightness = Brightness.light,
-  });
 
   // Background Colors
 
@@ -127,8 +127,8 @@ class ColorPalette {
 
   Color get cardColorDark => brightness == Brightness.dark ? basic0 : primary.shade900;
 
-  FontColors getFontColors(BuildContext context) {
-    return context.isLight || brightness == Brightness.dark ? fontColors : fontColorsDark;
+  FontColors getFontColors(Brightness brightness) {
+    return brightness == Brightness.light || this.brightness == Brightness.dark ? fontColors : fontColorsDark;
   }
 
   // Font Colors

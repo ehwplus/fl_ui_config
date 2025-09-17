@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Add global getters for [uiConfig], [colorPalette], [assets], [fonts], [alternativeColorPaletteKey] and [isHighContrastEnabled];
+
 ## 0.0.4
 
 * Allow to use another ColorPalette for brightness dark

@@ -10,6 +10,7 @@ class MaterialAppWithUiConfig extends StatelessWidget {
     required this.title,
     this.themeMode = ThemeMode.system,
     this.home,
+    this.builder,
     this.routes = const <String, WidgetBuilder>{},
     this.onGenerateRoute,
     this.navigatorObservers = const <NavigatorObserver>[],
@@ -23,6 +24,7 @@ class MaterialAppWithUiConfig extends StatelessWidget {
   final ThemeMode themeMode;
 
   final Widget? home;
+  final TransitionBuilder? builder;
   final Map<String, WidgetBuilder> routes;
   final RouteFactory? onGenerateRoute;
   final List<NavigatorObserver> navigatorObservers;
@@ -36,15 +38,17 @@ class MaterialAppWithUiConfig extends StatelessWidget {
       uiConfigManager: uiConfigManager,
       placeholderWidget: placeholderWidget,
       builder: (
-          {String? alternativeColorPaletteKey,
-          required ThemeMode themeMode,
-          required bool isHighContrastEnabled}) {
-        final lightTheme =
-            uiConfig.lightTheme(alternativeMode: alternativeColorPaletteKey);
-        final darkTheme =
-            uiConfig.darkTheme(alternativeMode: alternativeColorPaletteKey);
+          {String? alternativeColorPaletteKey, required ThemeMode themeMode, required bool isHighContrastEnabled}) {
+        final lightTheme = uiConfig.lightTheme(alternativeMode: alternativeColorPaletteKey);
+        final darkTheme = uiConfig.darkTheme(alternativeMode: alternativeColorPaletteKey);
         return MaterialApp(
-            title: title, theme: lightTheme, darkTheme: darkTheme, home: home);
+          title: title,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeMode,
+          home: home,
+          builder: builder,
+        );
       },
     );
   }

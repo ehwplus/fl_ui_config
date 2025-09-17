@@ -1,5 +1,5 @@
 // widget
-export 'src/widget/stateful_widget_with_client_config.dart';
+export 'src/widget/stateful_widget_with_ui_config.dart';
 export 'src/widget/ui_config_material_app.dart';
 
 // ui config
@@ -26,3 +26,4 @@ export 'src/common/generate_replacement_map.dart';
 export 'src/extensions/build_context_with_theme_mode.dart';
 export 'src/extensions/material_color_extensions.dart';
 export 'src/extensions/color_hex_extension.dart';
+export 'src/extensions/build_context_with_ui_config.dart';

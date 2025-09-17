@@ -2,7 +2,7 @@
 
 A small, focused Flutter library to define an app-wide, consistent UI configuration and control it at runtime:
 
-- **Color palettes**: default and alternative palettes (e.g. "red", "yellow")
+- **Color palettes**: default and alternative palettes
 - **Theming**: generate `ThemeData` for light/dark from a `ColorPalette`
 - **Persistence**: pluggable `UiConfigManager` (in-memory for tests or `SharedPreferences` for production)
 - **Easy integration**: drop-in `MaterialAppWithUiConfig` wrapper
@@ -15,6 +15,7 @@ A small, focused Flutter library to define an app-wide, consistent UI configurat
 - Advanced usage (color palettes, `UiConfigManager`)
 - Example app
 - FAQ
+- Planned for the future
 - License
 
 ---
@@ -41,7 +42,7 @@ In your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  fl_ui_config: ^0.0.1
+  fl_ui_config: ">=0.0.5 <0.1.0"
 ```
 
 Import in Dart files:
@@ -109,6 +110,10 @@ This example:
 - wraps the app with `MaterialAppWithUiConfig`,
 - uses `TesterUiConfigManager` (in-memory; handy for local testing).
 
+Inside the app simply call `uiConfig`, `colorPalette`, `assets`, `fonts`, 
+`alternativeColorPaletteKey` or `isHighContrastEnabled`. There is no need to use `BuildContext` 
+to read a ui config value.
+
 ---
 
 ### Advanced usage
@@ -128,8 +133,8 @@ final config = UiConfig(
 `UiConfig` derives `ThemeData` for light and dark from your palette:
 
 ```dart
-final light = config.lightTheme(context, alternativeMode: 'green');
-final dark = config.darkTheme(context, alternativeMode: 'green');
+final light = config.lightTheme(alternativeMode: 'green');
+final dark = config.darkTheme(alternativeMode: 'green');
 ```
 
 #### Choose a UiConfigManager
@@ -198,7 +203,15 @@ flutter run
   Yes, via `FontsConfig` and `AssetsConfig` in `UiConfig`.
 
 - **How do I change the palette programmatically?**
-  Use the selected `UiConfigManager` (`saveAlternativeColorPaletteKey(...)`).
+  Use the selected `UiConfigManager` by calling `context.saveAlternativeColorPaletteKey(...)`.
+
+---
+
+### Planned for the future
+
+- Support high contrast themes
+- Add sizes (margins, paddings, radius, ...)
+- Continue implementation of asset management
 
 ---
 
