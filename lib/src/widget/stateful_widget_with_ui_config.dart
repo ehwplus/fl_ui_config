@@ -244,6 +244,11 @@ class _GlobalUiConfigSettings {
 
 late _GlobalUiConfigSettings _globalUiConfigSettings;
 
+FontColors get fontColors {
+  final brightness = _globalUiConfigSettings.brightness;
+  return _globalUiConfigSettings.colorPalette.getFontColors(brightness);
+}
+
 /// The currently active [ColorPalette] derived from the selected key.
 ColorPalette get colorPalette {
   return _globalUiConfigSettings.colorPalette;
@@ -255,7 +260,7 @@ AssetsConfig get assets {
 }
 
 /// The configured [FontsConfig].
-FontsConfig get fonts {
+FontsConfig get fontsConfig {
   return _globalUiConfigSettings.uiConfig.fonts;
 }
 
@@ -272,4 +277,8 @@ UiConfig get uiConfig {
 /// The selected alternative palette key or null when default.
 String? get alternativeColorPaletteKey {
   return _globalUiConfigSettings.alternativeColorPaletteKey;
+}
+
+ThemeMode get themeMode {
+  return _globalUiConfigSettings.themeMode;
 }

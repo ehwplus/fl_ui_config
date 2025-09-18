@@ -110,9 +110,9 @@ This example:
 - wraps the app with `MaterialAppWithUiConfig`,
 - uses `TesterUiConfigManager` (in-memory; handy for local testing).
 
-Inside the app simply call `uiConfig`, `colorPalette`, `assets`, `fonts`, 
-`alternativeColorPaletteKey` or `isHighContrastEnabled`. There is no need to use `BuildContext` 
-to read a ui config value.
+Inside the app simply call `uiConfig`, `colorPalette`, `assets`, `fontsConfig`, `fontColors`,
+`alternativeColorPaletteKey`, or `isHighContrastEnabled`. 
+There is no need to use `BuildContext` to read a ui config value.
 
 ---
 
