@@ -16,7 +16,6 @@ export 'src/color_palette/font_colors.dart';
 export 'src/assets_config/assets_config.dart';
 
 // fonts
-export 'src/fonts_config/fonts.dart';
 export 'src/fonts_config/fonts_config.dart';
 
 // common

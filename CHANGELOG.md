@@ -1,4 +1,4 @@
-## 0.0.7
+## 0.0.8
 
 * Add global getters for [uiConfig], [colorPalette], [assets], [fontsConfig], [fontColors], [alternativeColorPaletteKey] and [isHighContrastEnabled];
 
