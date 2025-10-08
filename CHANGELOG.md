@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Fix: Access to dark color palette without context
+
 ## 0.0.8
 
 * Add global getters for [uiConfig], [colorPalette], [assets], [fontsConfig], [fontColors], [alternativeColorPaletteKey] and [isHighContrastEnabled];

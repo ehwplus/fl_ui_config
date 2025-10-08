@@ -152,12 +152,17 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
       child: FutureBuilder<UiSettings>(
         future: _initFuture,
         builder: (_, snapshot) {
+          final brightness = themeMode == ThemeMode.system
+              ? MediaQuery.of(context).platformBrightness
+              : themeMode == ThemeMode.dark
+                  ? Brightness.dark
+                  : Brightness.light;
           _globalUiConfigSettings = _GlobalUiConfigSettings(
             alternativeColorPaletteKey: alternativeColorPaletteKey,
             themeMode: themeMode,
             isHighContrastEnabled: isHighConstrastEnabled,
             uiConfig: widget.uiConfig,
-            brightness: Theme.of(context).brightness,
+            brightness: brightness,
           );
           return snapshot.hasData
               ? widget.builder(

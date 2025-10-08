@@ -1,6 +1,6 @@
 name: fl_ui_config
 description: "Handle UI configuration and changes of a Flutter app. This is a small, focused Flutter library to define an app-wide, consistent UI configuration and control it at runtime."
-version: 0.0.8
+version: 0.0.9
 homepage: https://github.com/ehwplus/fl_ui_config
 
 environment:
