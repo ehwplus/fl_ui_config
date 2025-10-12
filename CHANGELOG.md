@@ -1,3 +1,7 @@
+# 0.0.10
+
+* Minor fix: getSuccessColor, getWarningColor condition
+
 ## 0.0.9
 
 * Fix: Access to dark color palette without context
