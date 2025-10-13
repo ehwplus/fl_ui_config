@@ -1,24 +1,60 @@
+import 'package:fl_ui_config/src/widget/stateful_widget_with_ui_config.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'asset.dart';
 
-const _packagePath = 'packages/ui_library/';
-const _assetsFolderPath = 'assets';
-
 abstract class LocalImage extends Asset {
-  const LocalImage();
+  const LocalImage({
+    /// Default image path, e.g. for light mode
+    /// Example value: 'packages/your_library/assets/logo.svg'
+    required String path,
 
-  String get path;
+    /// Optional the image path for dark mode
+    /// Example value: 'packages/your_library/assets/logo-dark.svg'
+    String? pathDark,
+    String? pathHighContrast,
+    String? pathDarkHighContrast,
+  })  : _path = path,
+        _pathDark = pathDark,
+        _pathHighContrast = pathHighContrast,
+        _pathDarkHighContrast = pathDarkHighContrast;
+
+  /// Default image path, e.g. for light mode
+  /// Example value: 'packages/your_library/assets/logo.svg'
+  final String _path;
+
+  /// Optional the image path for dark mode
+  /// Example value: 'packages/your_library/assets/logo-dark.svg'
+  final String? _pathDark;
+
+  final String? _pathHighContrast;
+  final String? _pathDarkHighContrast;
+
+  String get path {
+    final isDark = brightness == Brightness.dark;
+    if (isHighContrastEnabled) {
+      if (isDark && _pathDarkHighContrast != null) {
+        return _pathDarkHighContrast;
+      }
+      if (_pathHighContrast != null) {
+        return _pathHighContrast;
+      }
+    }
+
+    if (isDark && _pathDark != null) {
+      return _pathDark;
+    }
+
+    return _path;
+  }
 }
 
 class LocalImageAsset extends LocalImage {
-  final String fileName;
-
-  const LocalImageAsset({required this.fileName});
-
-  @override
-  String get path => '$_packagePath$_assetsFolderPath/$fileName';
+  const LocalImageAsset({
+    required super.path,
+    super.pathDark,
+  });
 
   @override
   Widget build({
@@ -43,12 +79,10 @@ class LocalImageAsset extends LocalImage {
 }
 
 class LocalVectorImageAsset extends LocalImage {
-  final String fileName;
-
-  const LocalVectorImageAsset({required this.fileName});
-
-  @override
-  String get path => '$_packagePath$_assetsFolderPath/$fileName.svg';
+  const LocalVectorImageAsset({
+    required super.path,
+    super.pathDark,
+  });
 
   @override
   Widget build({

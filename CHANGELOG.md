@@ -1,3 +1,7 @@
+# 0.1.0
+
+* Feat: Asset and ImageAsset exposed. Requires full path to image file.
+
 # 0.0.10
 
 * Minor fix: getSuccessColor, getWarningColor condition

@@ -287,3 +287,7 @@ String? get alternativeColorPaletteKey {
 ThemeMode get themeMode {
   return _globalUiConfigSettings.themeMode;
 }
+
+Brightness get brightness {
+  return _globalUiConfigSettings.brightness;
+}

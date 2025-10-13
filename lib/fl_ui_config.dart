@@ -14,6 +14,8 @@ export 'src/color_palette/font_colors.dart';
 
 // assets
 export 'src/assets_config/assets_config.dart';
+export 'src/assets_config/asset.dart';
+export 'src/assets_config/local_image_asset.dart';
 
 // fonts
 export 'src/fonts_config/fonts_config.dart';
