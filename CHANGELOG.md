@@ -1,3 +1,7 @@
+# 0.1.1
+
+* Feat: Add getter colorPaletteLight and colorPaletteDark
+
 # 0.1.0
 
 * Feat: Asset and ImageAsset exposed. Requires full path to image file.
