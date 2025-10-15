@@ -2,7 +2,11 @@ import 'package:fl_ui_config/fl_ui_config.dart';
 import 'package:flutter/material.dart';
 
 /// Bundle of UI settings provided by [StatefulWidgetWithUiConfig]'s builder.
-typedef UiSettings = ({String? alternativeColorPaletteKey, ThemeMode themeMode, bool isHighContrastEnabled});
+typedef UiSettings = ({
+  String? alternativeColorPaletteKey,
+  ThemeMode themeMode,
+  bool isHighContrastEnabled
+});
 
 /// A stateful wrapper that loads, exposes and persists UI configuration
 /// (theme mode, color palette, high contrast) via a [UiConfigManager],
@@ -55,8 +59,10 @@ class StatefulWidgetWithUiConfig extends StatefulWidget {
   ///
   /// Throws an assertion error in debug mode if the widget is missing.
   static ClientConfigState of(BuildContext context) {
-    final ClientConfigState? result = context.findAncestorStateOfType<ClientConfigState>();
-    assert(result != null, 'No StatefulWidgetWithClientConfig found in context. Did you forget to wrap your app?');
+    final ClientConfigState? result =
+        context.findAncestorStateOfType<ClientConfigState>();
+    assert(result != null,
+        'No StatefulWidgetWithClientConfig found in context. Did you forget to wrap your app?');
     return result!;
   }
 }
@@ -89,7 +95,8 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
   void initState() {
     super.initState();
     _globalUiConfigSettings = _GlobalUiConfigSettings(
-      alternativeColorPaletteKey: widget.uiConfigManager.loadAlternativeColorPaletteKey(),
+      alternativeColorPaletteKey:
+          widget.uiConfigManager.loadAlternativeColorPaletteKey(),
       themeMode: widget.defaultThemeMode,
       isHighContrastEnabled: false,
       uiConfig: uiConfig,
@@ -119,12 +126,16 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
   /// from [defaultColorPaletteKey] and [defaultThemeMode] when not set.
   Future<UiSettings> _load() async {
     final alternativeColorPaletteKey =
-        widget.uiConfigManager.loadAlternativeColorPaletteKey() ?? widget.defaultColorPaletteKey;
+        widget.uiConfigManager.loadAlternativeColorPaletteKey() ??
+            widget.defaultColorPaletteKey;
     final themeModeRawValue = widget.uiConfigManager.loadThemeMode();
-    final themeMode = ThemeMode.values.firstWhere((v) => v == themeModeRawValue, orElse: () => widget.defaultThemeMode);
-    final isHighContrastEnabled = widget.uiConfigManager.loadIsHighContrastEnabled();
+    final themeMode = ThemeMode.values.firstWhere((v) => v == themeModeRawValue,
+        orElse: () => widget.defaultThemeMode);
+    final isHighContrastEnabled =
+        widget.uiConfigManager.loadIsHighContrastEnabled();
 
-    _updateAlternativeColorPaletteKey(alternativeColorPaletteKey, updateState: false);
+    _updateAlternativeColorPaletteKey(alternativeColorPaletteKey,
+        updateState: false);
     _updateThemeMode(themeMode, updateState: false);
     _updateIsHighContrastEnabled(isHighContrastEnabled, updateState: false);
     return (
@@ -159,7 +170,9 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
                   themeMode: themeMode,
                   isHighContrastEnabled: isHighConstrastEnabled,
                 )
-              : widget.placeholderWidget ?? const Center(child: Text('Waiting for user interface settings'));
+              : widget.placeholderWidget ??
+                  const Center(
+                      child: Text('Waiting for user interface settings'));
         },
       ),
     );
@@ -176,7 +189,8 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
   }
 
   /// Updates the current alternative palette key and triggers a rebuild when requested.
-  void _updateAlternativeColorPaletteKey(String? value, {bool updateState = true}) {
+  void _updateAlternativeColorPaletteKey(String? value,
+      {bool updateState = true}) {
     _alternativeColorPaletteKey = value;
     if (updateState) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -223,7 +237,8 @@ class _GlobalUiConfigSettings {
 
   /// The currently active [ColorPalette] derived from the selected key.
   ColorPalette get colorPalette {
-    return uiConfig.getColorPalette(brightness: brightness, alternativeMode: alternativeColorPaletteKey);
+    return uiConfig.getColorPalette(
+        brightness: brightness, alternativeMode: alternativeColorPaletteKey);
   }
 
   /// The configured [FontsConfig].
@@ -245,11 +260,14 @@ ColorPalette get colorPalette {
 }
 
 ColorPalette get colorPaletteLight {
-  return uiConfig.getColorPalette(brightness: Brightness.light, alternativeMode: alternativeColorPaletteKey);
+  return uiConfig.getColorPalette(
+      brightness: Brightness.light,
+      alternativeMode: alternativeColorPaletteKey);
 }
 
 ColorPalette get colorPaletteDark {
-  return uiConfig.getColorPalette(brightness: Brightness.dark, alternativeMode: alternativeColorPaletteKey);
+  return uiConfig.getColorPalette(
+      brightness: Brightness.dark, alternativeMode: alternativeColorPaletteKey);
 }
 
 /// The configured [AssetsConfig].

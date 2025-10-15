@@ -1,6 +1,6 @@
 # 0.1.2
 
-* refactor: Use show inside imports because one test fails with "The getter 'Brightness' isn't defined for the class 'LocalImage'."
+* refactor: Use material import instead of new widgets mimport to resolve "The getter 'Brightness' isn't defined for the class 'LocalImage'."
 
 # 0.1.1
 
