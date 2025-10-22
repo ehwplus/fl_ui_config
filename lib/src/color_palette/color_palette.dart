@@ -120,14 +120,16 @@ class ColorPalette {
   // AppBar Background Colors
 
   Color getAppBarBackgroundColor(BuildContext context) {
-    return context.isDark || brightness == Brightness.dark
+    return context.isLight || brightness == Brightness.dark
         ? appBarBackgroundColor
         : appBarBackgroundColorDark;
   }
 
-  Color get appBarBackgroundColor => background;
+  /// Default value is primary.shade200
+  Color get appBarBackgroundColor => primary.shade200;
 
-  Color get appBarBackgroundColorDark => backgroundDark;
+  /// Default value is primary.shade800
+  Color get appBarBackgroundColorDark => primary.shade800;
 
   // Card Colors
 

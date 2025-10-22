@@ -34,8 +34,7 @@ class SettingColorPalette extends StatelessWidget {
         button: true,
         label: 'Change color palette',
         child: FilledButton.icon(
-          style:
-              style ??
+          style: style ??
               FilledButton.styleFrom(
                 backgroundColor: colorScheme.secondaryContainer,
                 foregroundColor: colorScheme.onSecondaryContainer,

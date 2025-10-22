@@ -34,8 +34,7 @@ class ColorsWidget extends StatelessWidget {
                     Builder(
                       builder: (context) {
                         final shades = entry.value.allShades;
-                        final double coloredBoxWidth =
-                            (constraints.maxWidth -
+                        final double coloredBoxWidth = (constraints.maxWidth -
                                 (2 *
                                     _marginHorizontal *
                                     materialColors.length)) /

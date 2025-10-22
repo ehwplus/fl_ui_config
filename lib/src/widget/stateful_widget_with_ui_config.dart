@@ -1,12 +1,16 @@
 import 'package:fl_ui_config/fl_ui_config.dart';
 import 'package:flutter/material.dart';
 
+import 'theme_controller.dart';
+
 /// Bundle of UI settings provided by [StatefulWidgetWithUiConfig]'s builder.
 typedef UiSettings = ({
   String? alternativeColorPaletteKey,
   ThemeMode themeMode,
   bool isHighContrastEnabled
 });
+
+final _themeController = ThemeController();
 
 /// A stateful wrapper that loads, exposes and persists UI configuration
 /// (theme mode, color palette, high contrast) via a [UiConfigManager],
@@ -113,6 +117,7 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
   /// Saves a new [ThemeMode] and updates local state.
   Future<void> saveThemeMode(ThemeMode value) async {
     _updateThemeMode(value);
+    _themeController.setMode(value);
     await widget.uiConfigManager.saveThemeMode(value);
   }
 
@@ -165,11 +170,15 @@ class ClientConfigState extends State<StatefulWidgetWithUiConfig> {
             brightness: brightness,
           );
           return snapshot.hasData
-              ? widget.builder(
-                  alternativeColorPaletteKey: alternativeColorPaletteKey,
-                  themeMode: themeMode,
-                  isHighContrastEnabled: isHighConstrastEnabled,
-                )
+              ? AnimatedBuilder(
+                  animation: _themeController,
+                  builder: (_, __) {
+                    return widget.builder(
+                      alternativeColorPaletteKey: alternativeColorPaletteKey,
+                      themeMode: themeMode,
+                      isHighContrastEnabled: isHighConstrastEnabled,
+                    );
+                  })
               : widget.placeholderWidget ??
                   const Center(
                       child: Text('Waiting for user interface settings'));

@@ -1,6 +1,12 @@
+# 0.1.3
+
+* Improvement: Add AnimatedContainer for smoother change between dark and light theme
+* Fix: getAppBarBackgroundColor should not return dark theme color for light
+* Improvement: Default app bar color taken from primary color palette
+
 # 0.1.2
 
-* refactor: Use material import instead of new widgets mimport to resolve "The getter 'Brightness' isn't defined for the class 'LocalImage'."
+* Refactor: Use material import instead of new widgets mimport to resolve "The getter 'Brightness' isn't defined for the class 'LocalImage'."
 
 # 0.1.1
 

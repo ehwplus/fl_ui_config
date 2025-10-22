@@ -1,4 +1,5 @@
 import 'package:example/example2/headline_large.dart';
+import 'package:fl_ui_config/fl_ui_config.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
@@ -18,7 +19,7 @@ class _MyHomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: colorPalette.getAppBarBackgroundColor(context),
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(

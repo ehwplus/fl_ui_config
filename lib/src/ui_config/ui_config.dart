@@ -111,7 +111,9 @@ class UiConfig {
           .textTheme
           .apply(fontFamily: fonts.fontFamily),
       cardColor: palette.cardColor,
-      appBarTheme: AppBarTheme(backgroundColor: palette.appBarBackgroundColor),
+      appBarTheme: AppBarTheme(
+        backgroundColor: palette.appBarBackgroundColor,
+      ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: palette.primary,
         foregroundColor: onPrimary,

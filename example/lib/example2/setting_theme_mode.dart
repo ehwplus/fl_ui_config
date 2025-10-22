@@ -42,8 +42,7 @@ class ThemeModeButton extends StatelessWidget {
         button: true,
         label: '${labels.changeTo}: $text',
         child: FilledButton.icon(
-          style:
-              style ??
+          style: style ??
               FilledButton.styleFrom(
                 backgroundColor: colorScheme.secondaryContainer,
                 foregroundColor: colorScheme.onSecondaryContainer,

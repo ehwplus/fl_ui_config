@@ -31,26 +31,25 @@ class ExampleApp2 extends StatelessWidget {
     return StatefulWidgetWithUiConfig(
       uiConfig: uiConfig,
       uiConfigManager: TesterUiConfigManager(delayInMillis: 0),
-      builder:
-          ({
-            String? alternativeColorPaletteKey,
-            required ThemeMode themeMode,
-            required bool isHighContrastEnabled,
-          }) {
-            final lightTheme = uiConfig.lightTheme(
-              alternativeMode: alternativeColorPaletteKey,
-            );
-            final darkTheme = uiConfig.darkTheme(
-              alternativeMode: alternativeColorPaletteKey,
-            );
-            return MaterialApp(
-              title: appName,
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              themeMode: themeMode,
-              home: const HomePage(title: appName),
-            );
-          },
+      builder: ({
+        String? alternativeColorPaletteKey,
+        required ThemeMode themeMode,
+        required bool isHighContrastEnabled,
+      }) {
+        final lightTheme = uiConfig.lightTheme(
+          alternativeMode: alternativeColorPaletteKey,
+        );
+        final darkTheme = uiConfig.darkTheme(
+          alternativeMode: alternativeColorPaletteKey,
+        );
+        return MaterialApp(
+          title: appName,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeMode,
+          home: const HomePage(title: appName),
+        );
+      },
     );
   }
 }
