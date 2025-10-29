@@ -1,3 +1,7 @@
+# 0.1.4
+
+* Fix: text selection color at dark theme
+
 # 0.1.3
 
 * Improvement: Add AnimatedContainer for smoother change between dark and light theme
