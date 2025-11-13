@@ -1,3 +1,7 @@
+# 0.1.5
+
+* Test: Add method `initializeGlobalUiConfigSettingsForWidgetTests`.
+
 # 0.1.4
 
 * Fix: text selection color at dark theme
