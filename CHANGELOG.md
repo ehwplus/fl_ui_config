@@ -1,6 +1,6 @@
-# 0.1.5
+# 0.1.6
 
-* Test: Add method `initializeGlobalUiConfigSettingsForWidgetTests`.
+* Feature: Add method `initializeGlobalUiConfigSettings`.
 
 # 0.1.4
 

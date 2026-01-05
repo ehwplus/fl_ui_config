@@ -243,13 +243,15 @@ class _GlobalUiConfigSettings {
 
 late _GlobalUiConfigSettings _globalUiConfigSettings;
 
-@visibleForTesting
-void initializeGlobalUiConfigSettingsForWidgetTests({required UiConfig uiConfig}) {
+/// Under some circumstances (e.g. tests or if the app is not yet fully initialized)
+/// it might be necessary to manually initialize the global UI settings.
+void initializeGlobalUiConfigSettings({required UiConfig uiConfig, Brightness? brightness}) {
   _globalUiConfigSettings = _GlobalUiConfigSettings(
     alternativeColorPaletteKey: null,
-    brightness: Brightness.light,
+    brightness: brightness ?? Brightness.light,
     isHighContrastEnabled: false,
-    themeMode: ThemeMode.system,
+    themeMode:
+        brightness != null ? (brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark) : ThemeMode.system,
     uiConfig: uiConfig,
   );
 }
